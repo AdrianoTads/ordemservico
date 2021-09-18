@@ -11,7 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.ResourceAccessException;
+
 
 import br.edu.ifms.ordemservico.dto.ServidorDTO;
 import br.edu.ifms.ordemservico.entities.Servidor;
@@ -35,7 +35,7 @@ public class ServidorService {
 	@Transactional(readOnly = true)
 	public ServidorDTO findById(Long id){
 		Optional<Servidor> obj = repository.findById(id);
-		Servidor servidor = obj.orElseThrow(()-> new ResourceAccessException("O servidor solicitado não foi localizado"));
+		Servidor servidor = obj.orElseThrow(()-> new ResourceNotFoundException("O servidor solicitado não foi localizado"));
 		return new ServidorDTO(servidor);
 	}
 	

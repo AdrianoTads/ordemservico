@@ -7,16 +7,13 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.ResourceAccessException;
 
 import br.edu.ifms.ordemservico.dto.OrdemDeServicoDTO;
 import br.edu.ifms.ordemservico.entities.OrdemDeServico;
 import br.edu.ifms.ordemservico.repositories.OrdemDeServicoRepository;
-import br.edu.ifms.ordemservico.services.exceptions.DataBaseException;
 import br.edu.ifms.ordemservico.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -35,7 +32,7 @@ public class OrdemDeServicoService {
 	@Transactional(readOnly = true)
 	public OrdemDeServicoDTO findById(Long id){
 		Optional<OrdemDeServico> obj = repository.findById(id);
-		OrdemDeServico ordem = obj.orElseThrow(()-> new ResourceAccessException("A ordem solicitada não foi localizada"));
+		OrdemDeServico ordem = obj.orElseThrow(()-> new ResourceNotFoundException("A ordem solicitada não foi localizada"));
 		return new OrdemDeServicoDTO(ordem);
 	}
 	

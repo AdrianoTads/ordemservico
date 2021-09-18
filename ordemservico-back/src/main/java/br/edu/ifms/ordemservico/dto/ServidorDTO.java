@@ -2,6 +2,10 @@ package br.edu.ifms.ordemservico.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import br.edu.ifms.ordemservico.entities.Servidor;
 
 public class ServidorDTO implements Serializable {
@@ -9,9 +13,14 @@ public class ServidorDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	@NotBlank(message= "O campo nome é obrigatório")
 	private String nome;
+	@NotBlank(message= "O telefone telefone é obrigatório")
 	private String telefone;
+	@Email
 	private String email;
+	@NotBlank(message= "O campo senha é obrigatório")
+	@Size(min = 5, max = 20, message = "Deve ter entre 5 e 20 caracteres")
 	private String senha;
 	
 	public ServidorDTO() {}

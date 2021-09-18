@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotBlank;
 
 import br.edu.ifms.ordemservico.entities.OrdemDeServico;
 import br.edu.ifms.ordemservico.entities.Servidor;
@@ -25,13 +27,19 @@ public class OrdemDeServicoDTO implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank(message= "O campo é obrigatório")
 	private String equipamento;
+	@NotBlank(message= "O campo é obrigatório")
 	private String patrimonio;
+	@NotBlank(message= "O campo é obrigatório")
 	private String setor;
+	@NotBlank(message= "O campo é obrigatório")
 	private String descricaoProblema;
+	@FutureOrPresent(message = "A data não pode ser no passado")
 	private Instant dataCadastro;
 	private Status status;
 	private Prioridade prioridade;
+	@NotBlank(message= "O campo é obrigatório")
 	private String descricaoSolucao;
 	private Servidor servidor;
 	

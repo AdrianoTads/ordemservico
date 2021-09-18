@@ -4,6 +4,8 @@ package br.edu.ifms.ordemservico.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,7 +23,7 @@ import br.edu.ifms.ordemservico.dto.OrdemDeServicoDTO;
 import br.edu.ifms.ordemservico.services.OrdemDeServicoService;
 
 @RestController
-@RequestMapping(value = "/ordens")
+@RequestMapping(value = "/ordemdeservicos")
 public class OrdemDeServicoResource {
 
 	@Autowired
@@ -40,7 +42,7 @@ public class OrdemDeServicoResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<OrdemDeServicoDTO> insert(@RequestBody OrdemDeServicoDTO dto){
+	public ResponseEntity<OrdemDeServicoDTO> insert(@Valid @RequestBody OrdemDeServicoDTO dto){
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 												.path("/{id}")
@@ -49,7 +51,7 @@ public class OrdemDeServicoResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<OrdemDeServicoDTO> update(@PathVariable Long id, @RequestBody OrdemDeServicoDTO dto){
+	public ResponseEntity<OrdemDeServicoDTO> update(@PathVariable Long id, @Valid @RequestBody OrdemDeServicoDTO dto){
 		dto = service.update(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}
